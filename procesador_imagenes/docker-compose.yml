@@ -1,0 +1,32 @@
+services:
+  redis:
+    image: redis:7
+    container_name: image_redis
+    ports:
+      - "6379:6379"
+
+  backend:
+    build: ./backend
+    container_name: image_backend
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+      - UPLOAD_DIR=/app/data/uploads
+      - PROCESSED_DIR=/app/data/processed
+    volumes:
+      - ./frontend:/app/frontend
+      - ./data:/app/data
+
+  worker:
+    build: ./worker
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+      - UPLOAD_DIR=/app/data/uploads
+      - PROCESSED_DIR=/app/data/processed
+    volumes:
+      - ./data:/app/data

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Procesador de Imágenes</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="container">
+    <section class="card hero">
+      <h1>Procesador de Imágenes</h1>
+    </section>
+
+    <section class="card">
+      <h2>Nueva tarea</h2>
+
+      <label for="imageInput">Imagen</label>
+      <input id="imageInput" type="file" accept="image/*" />
+      <p id="imageInfo" class="image-info">Selecciona una imagen para ver sus medidas.</p>
+
+      <label for="operation">Operación</label>
+      <select id="operation">
+        <option value="thumbnail">Generar miniatura</option>
+        <option value="resize">Redimensionar con medidas personalizadas</option>
+        <option value="grayscale">Filtro escala de grises</option>
+        <option value="blur">Aplicar blur</option>
+        <option value="convert_jpg">Convertir a JPG</option>
+      </select>
+
+      <div id="resizeOptions" class="resize-options hidden">
+        <h3>Medidas personalizadas</h3>
+        <div class="dimensions-grid">
+          <div>
+            <label for="widthInput">Ancho (px)</label>
+            <input id="widthInput" type="number" min="1" placeholder="Ej. 1280" />
+          </div>
+          <div>
+            <label for="heightInput">Alto (px)</label>
+            <input id="heightInput" type="number" min="1" placeholder="Ej. 720" />
+          </div>
+        </div>
+        <p id="selectedSize" class="image-info">Nuevo tamaño: sin definir</p>
+      </div>
+
+      <button id="sendBtn">Enviar imagen</button>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Estado de la tarea</h2>
+        <p id="status" class="status">Sin tarea</p>
+        <p id="workerInfo"></p>
+      </div>
+
+      <div class="card">
+        <h2>Resultado</h2>
+        <div id="previewBox" class="preview-box">
+          <p>La imagen procesada aparecerá aquí.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
